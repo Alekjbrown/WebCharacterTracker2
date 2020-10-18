@@ -7,19 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.NPC;
+import model.StatBlock;
 
 /**
- * Servlet implementation class AddItemServlet
+ * Servlet implementation class AddStatblockServlet
  */
-@WebServlet("/addNPCServlet")
-public class AddNPCServlet extends HttpServlet {
+@WebServlet("/addStatblockServlet")
+public class AddStatblockServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddNPCServlet() {
+    public AddStatblockServlet() {
         super();
         //  Auto-generated constructor stub
     }
@@ -37,16 +37,20 @@ public class AddNPCServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//  Auto-generated method stub
-		String name = request.getParameter("name");
-		String race = request.getParameter("race");
-		Integer age = Integer.parseInt(request.getParameter("age"));
+		int strength = Integer.parseInt(request.getParameter("strength"));
+		int dexterity = Integer.parseInt(request.getParameter("dexterity"));
+		int constitution = Integer.parseInt(request.getParameter("constitution"));
+		int intelligence = Integer.parseInt(request.getParameter("intelligence"));
+		int wisdom = Integer.parseInt(request.getParameter("wisdom"));
+		int charisma = Integer.parseInt(request.getParameter("charisma"));
 		
-		NPC npc = new NPC(name,race,age);
-		NPCHelper dao = new NPCHelper();
-		dao.insert(npc);
+		StatBlock stat = new StatBlock(strength,dexterity,constitution,intelligence,wisdom,charisma);
+		StatBlockHelper dao = new StatBlockHelper();
+		dao.insertStatBlock(stat);
 		
 		//send back to add another
-		getServletContext().getRequestDispatcher("/addNPC.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/new-statblock.jsp").forward(request, response);
+		
 	}
 
 }

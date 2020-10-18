@@ -29,5 +29,6 @@
 		<input type="submit" value="delete" name="doThis">
 		<input type="submit" value="add" name="doThis">
 	</form>
+	<button onclick="window.location.href='index.html'">Home</button>
 </body>
 </html>

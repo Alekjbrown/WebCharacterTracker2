@@ -24,7 +24,6 @@ public class NPCDetails {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="NPC_ID")
 	private NPC npc;
-	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="STATBLOCK_ID")
 	private StatBlock statblock;
 	

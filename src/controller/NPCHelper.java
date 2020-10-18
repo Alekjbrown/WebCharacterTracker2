@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
 import model.NPC;
@@ -26,7 +27,7 @@ public class NPCHelper {
 		return allNPC;
 	}
 	
-	public void delete(NPC toDelete) {
+	public void delete(NPC toDelete) throws RollbackException{
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		TypedQuery<NPC> tq = em.createQuery("SELECT i FROM NPC i where i.name = :selectedName and i.race = :selectedRace",NPC.class);

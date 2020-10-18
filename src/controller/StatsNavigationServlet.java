@@ -10,25 +10,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.NPC;
+import model.StatBlock;
 
 /**
- * Servlet implementation class NavigationServlet
+ * Servlet implementation class StatsNavigationServlet
  */
-@WebServlet("/navigationServlet")
-public class NavigationServlet extends HttpServlet {
+@WebServlet("/statsNavigationServlet")
+public class StatsNavigationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public StatsNavigationServlet() {
+        super();
+        //  Auto-generated constructor stub
+    }
 
 	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public NavigationServlet() {
-		super();
-		// Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 //	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		//  Auto-generated method stub
@@ -36,43 +36,40 @@ public class NavigationServlet extends HttpServlet {
 //	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// Auto-generated method stub
-//		doGet(request, response);
-		NPCHelper dao = new NPCHelper();
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//  Auto-generated method stub
+		StatBlockHelper dao = new StatBlockHelper();
 		
 		String act = request.getParameter("doThis");
 		
 		//After changes redirect to view all if not edit or add
-		String path = "/viewAllNPCServlet";
+		String path = "/viewAllStatblocksServlet";
 		
 		if(act.equals("delete")) {
 			try {
 				Integer tempId = Integer.parseInt(request.getParameter("id"));
-				NPC npcToDelete = dao.searchByID(tempId);
-				dao.delete(npcToDelete);
+				StatBlock statBlockToDelete = dao.searchById(tempId);
+				dao.delete(statBlockToDelete);
 			} catch (NumberFormatException e) {
 				//  Auto-generated catch block
-				System.out.println("No NPC selected");
+				System.out.println("No stats selected");
 			}catch (RollbackException e) {
-				getServletContext().getRequestDispatcher("/viewAllNPCServlet").forward(request, response);
+				getServletContext().getRequestDispatcher("/viewAllStatblocksServlet").forward(request, response);
 			}
 		}else if(act.equals("edit")) {
 			try {
 				Integer tempId = Integer.parseInt(request.getParameter("id"));
-				NPC npcToEdit = dao.searchByID(tempId);
-				request.setAttribute("npcToEdit", npcToEdit);
-				path = "/edit-NPC.jsp";
+				StatBlock statBlockToEdit = dao.searchById(tempId);
+				request.setAttribute("statToEdit", statBlockToEdit);
+				path = "/edit-statblock.jsp";
 			} catch (NumberFormatException e) {
 				//  Auto-generated catch block
-				System.out.println("No NPC Selected");
+				System.out.println("No stats Selected");
 			}
 		}else if(act.equals("add")) {
-			path = "/addNPC.jsp";
+			path = "/new-statblock.jsp";
 		}
 		
 		getServletContext().getRequestDispatcher(path).forward(request, response);

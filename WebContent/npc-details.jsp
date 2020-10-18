@@ -8,12 +8,13 @@
 <title>NPC Details</title>
 </head>
 <body>
-	<form method="post" action="DetailsNavigationServlet">
+	<form method="post" action="detailsNavigationServlet">
 		<table>
 			<c:forEach items="${requestScope.allNpcs}" var="currentNpc">
 				<tr>
-					<td><input type="radio" name="id" value="${currentNpc.id}"></td>
-					<td><h2>${currentNpc.npc.name}</h2></td>
+					<td><input type="radio" name="id" value="${currentNpc.id}">
+					<h2>${currentNpc.npc.name}</h2>
+					</td>
 				</tr>
 				<tr>
 					<td colspan="3">Race: ${currentNpc.npc.race}</td>
@@ -21,30 +22,31 @@
 				<tr>
 					<td colspan="3">Age: ${currentNpc.npc.age}</td>
 				</tr>
-				<tr>
-					<td colspan="3">Strength: ${currentNpc.statblock.strength}</td>
-				</tr>
-				<tr>
-					<td colspan="3">Dexterity: ${currentNpc.statblock.dexterity}</td>
-				</tr>
-				<tr>
-					<td colspan="3">Constitution: ${currentNpc.statblock.constitution}</td>
-				</tr>
-				<tr>
-					<td colspan="3">Intelligence: ${currentNpc.statblock.intelligence}</td>
-				</tr>
-				<tr>
-					<td colspan="3">Wisdom: ${currentNpc.statblock.wisdom}</td>
-				</tr>
-				<tr>
-					<td colspan="3">Charisma: ${currentNpc.statblock.charisma }</td>
-				</tr>
+				<table>
+					<tr>
+						<td>STR</td>
+						<td>DEX</td>
+						<td>CON</td>
+						<td>INT</td>
+						<td>WIS</td>
+						<td>CHA</td>
+					</tr>
+					<tr>
+						<td>${currentNpc.statblock.strength}</td>
+						<td>${currentNpc.statblock.dexterity}</td>
+						<td>${currentNpc.statblock.constitution}</td>
+						<td>${currentNpc.statblock.intelligence}</td>
+						<td>${currentNpc.statblock.wisdom}</td>
+						<td>${currentNpc.statblock.charisma}</td>
+					</tr>
+				</table>
+				<h1>--------------------------</h1>
 			</c:forEach>
 		</table>
 		<input type="submit" value="edit" name="doThis">
 		<input type="submit" value="delete" name="doThis">
 		<input type="submit" value="add" name="doThis">
 	</form>
-	<a href="addNPCDetailsServlet">Create a new NPC</a>
+	<button onclick="window.location.href='index.html'">Home</button>
 </body>
 </html>

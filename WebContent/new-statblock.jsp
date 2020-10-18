@@ -5,21 +5,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>New Stat Block</title>
+<title>New Statblock</title>
 </head>
 <body>
-	<form action="createNewNPCServlet" method="post">
-		Name: <input type="text" name="npcName"><br>
-		Race: <input type="text" name="npcRace"><br>
-		Age: <input type="number" name="npcAge"><br>
-		Strength: <input type="number" name="npcStrength"><br>
-		Dexterity: <input type="number" name="npcDexterity"><br>
-		Constitution: <input type="number" name="npcConstitution"><br>
-		Intelligence: <input type="number" name="npcIntelligence"><br>
-		Wisdom: <input type="number" name="npcWisdom"><br>
-		Charisma: <input type="number" name="npcCharisma"><br>
-		<input type="submit" value="Create NPC and Stat Block">
+	<h1>Add New Statblock</h1>
+	<form action="addStatblockServlet" method="post">
+		Strength: <input type="number" name="strength"><br>
+		Dexterity: <input type="number" name="dexterity"><br>
+		Constitution: <input type="number" name="constitution"><br>
+		Intelligence: <input type="number" name="intelligence"><br>
+		Wisdom: <input type="number" name="wisdom"><br>
+		Charisma: <input type="number" name="charisma"><br>
+		<input type="submit" value="Save New">
 	</form>
-	<a href="index.html">Go Home</a>
+	<br>
+	<button onclick="window.location.href='index.html'">Home</button>
 </body>
 </html>

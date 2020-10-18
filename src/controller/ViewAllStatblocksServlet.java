@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.NPC;
-
 /**
- * Servlet implementation class AddItemServlet
+ * Servlet implementation class ViewAllStatblocksServlet
  */
-@WebServlet("/addNPCServlet")
-public class AddNPCServlet extends HttpServlet {
+@WebServlet("/viewAllStatblocksServlet")
+public class ViewAllStatblocksServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddNPCServlet() {
+    public ViewAllStatblocksServlet() {
         super();
         //  Auto-generated constructor stub
     }
@@ -27,26 +25,27 @@ public class AddNPCServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		//  Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-//	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//  Auto-generated method stub
+		StatBlockHelper dao = new StatBlockHelper();
+		request.setAttribute("allStatBlocks", dao.getAll());
+		String path = "/viewAllStats.jsp";
+		
+		if(dao.getAll().isEmpty()) {
+			System.out.println("list was empty");
+			path = "/new-statblock.jsp";
+		}
+		
+		getServletContext().getRequestDispatcher(path).forward(request, response);
+		
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//  Auto-generated method stub
-		String name = request.getParameter("name");
-		String race = request.getParameter("race");
-		Integer age = Integer.parseInt(request.getParameter("age"));
-		
-		NPC npc = new NPC(name,race,age);
-		NPCHelper dao = new NPCHelper();
-		dao.insert(npc);
-		
-		//send back to add another
-		getServletContext().getRequestDispatcher("/addNPC.jsp").forward(request, response);
+		doGet(request, response);
 	}
 
 }

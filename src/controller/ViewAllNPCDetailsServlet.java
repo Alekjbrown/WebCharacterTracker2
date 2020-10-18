@@ -34,12 +34,15 @@ public class ViewAllNPCDetailsServlet extends HttpServlet {
 		NPCDetailsHelper ndh = new NPCDetailsHelper();
 		List<NPCDetails> detailsList = ndh.getNPCS();
 		request.setAttribute("allNpcs", detailsList);
+		String path = "/npc-details.jsp";
 		
 		if(detailsList.isEmpty()) {
 			request.setAttribute("allNpcs", " ");
+			System.out.println("list was empty");
+			path = "/new-statblock.jsp";
 		}
 		
-		getServletContext().getRequestDispatcher("/npc-details.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher(path).forward(request, response);
 	}
 
 	/**

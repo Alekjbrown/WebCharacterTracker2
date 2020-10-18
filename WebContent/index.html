@@ -6,17 +6,20 @@
 </head>
 <body>
 	<h1>Character Tracker</h1>
-	<form action="addNPC.jsp" method="post">
-		<input type="submit" value="Add NPC">
-	</form>
-	<form action="viewAllNPCServlet">
-		<input type="submit" value="View All NPCs">
-	</form>
-	<form action="viewAllNPCDetailsServlet">
-		<input type="submit" value="View All Detailed">
-	</form>
-	<form action="addStatBlockServlet">
-		<input type="submit" value="Create a new Detailed NPC">
-	</form>
+	<div>	
+		<button onclick="window.location.href='viewAllNPCServlet'">View All NPCs</button>
+		
+		<button onclick="window.location.href='viewAllStatblocksServlet'">View Statblocks</button>
+		
+		<button onclick="window.location.href='viewAllNPCDetailsServlet'">View All Detailed</button>
+	</div>
+	<div>
+		<button onclick="window.location.href='addNPC.jsp'">Add NPC</button>
+		
+		<button onclick="window.location.href='new-statblock.jsp'">Add StatBlock</button>
+	
+		<button onclick="window.location.href='addNPCDetailServlet'">Create a new Detailed NPC</button>
+	</div>
+
 </body>
 </html>

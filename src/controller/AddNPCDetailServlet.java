@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.NPC;
-
 /**
- * Servlet implementation class AddItemServlet
+ * Servlet implementation class AddNPCDetailsServlet
  */
-@WebServlet("/addNPCServlet")
-public class AddNPCServlet extends HttpServlet {
+@WebServlet("/addNPCDetailServlet")
+public class AddNPCDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddNPCServlet() {
+    public AddNPCDetailServlet() {
         super();
         //  Auto-generated constructor stub
     }
@@ -27,26 +25,26 @@ public class AddNPCServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		//  Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-//	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//  Auto-generated method stub
+		StatBlockHelper sbh = new StatBlockHelper();
+		
+		request.setAttribute("allStatblocks", sbh.getAll());
+		
+		if(sbh.getAll().isEmpty()) {
+			request.setAttribute("allStatblocks", " ");
+		}
+		
+		getServletContext().getRequestDispatcher("/new-npc-details.jsp").forward(request, response);
+		
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//  Auto-generated method stub
-		String name = request.getParameter("name");
-		String race = request.getParameter("race");
-		Integer age = Integer.parseInt(request.getParameter("age"));
-		
-		NPC npc = new NPC(name,race,age);
-		NPCHelper dao = new NPCHelper();
-		dao.insert(npc);
-		
-		//send back to add another
-		getServletContext().getRequestDispatcher("/addNPC.jsp").forward(request, response);
+		doGet(request, response);
 	}
 
 }
